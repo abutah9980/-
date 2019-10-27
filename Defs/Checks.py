@@ -18,7 +18,7 @@ def checkConnection(host='https://google.com'): #Connection check
     system('clear')
     try:
         urlopen(host, timeout=10)
-	print(_("{0}HURRAY!! Internet is available.. We can Continue{1}\n\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\n\n").format(GREEN, DEFAULT))
+        print(_("{0}HURRAY!! Internet is available.. We can Continue{1}\n\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\nPlease ZoomIn/ZoomOut To Fit on Your Device Screen.\n\n").format(GREEN, DEFAULT))
         return True
     except:
         return False
@@ -77,7 +77,7 @@ def checkPermissions():
                 print("{0}Permissions granted!".format(GREEN))
             else:
                 print("{0}If possible! Please run as 'sudo' !".format(RED))
-		print("{0}Still We can continue, But script can show errors. !! ".format(GREEN))
+                print("{0}Still We can continue, But script can show errors. !! ".format(GREEN))
         elif systemos() == 'Windows':
             if ctypes.windll.shell32.IsUserAnAdmin() != 0:
                 print("{0}Permissions granted!".format(GREEN))
