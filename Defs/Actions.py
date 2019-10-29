@@ -156,7 +156,7 @@ def selectServer(port): #Question where user must select server
         {0}** BY:DARKSEC ** \n\n-------------------------------\n{0}[ HOST SERVER SELECTION ]{1}!! {0}\n-------------------------------''').format(MAIN0, MAIN2))
         print(_("\n {1}[{0}!{1}]{1}(LOCALXPOSE/SERVEO WORKS BETTER)").format(MAIN0, MAIN2))
         print(_("\n {0}[{1}*{0}]{0}Select Any Available Server:{1}").format(MAIN0, MAIN4))
-        print(_("\n {0}[{1}1{0}]{1}Ngrok\n {0}[{1}2{0}]{1}Serveo\n {0}[{1}3{0}]{1}Localxpose").format(MAIN0, MAIN2))
+        print(_("\n {0}[{1}1{0}]{1}Ngrok\n {0}[{1}2{0}]{1}Serveo\n {0}[{1}3{0}]{1}Localxpose {0}[NOT SUPPORTS TERMUX(ANDROID),SUPPORTS USERLAND (ANDROID)]").format(MAIN0, MAIN2))
 
         choice = input(" \n{0}HiddenEye >>> {2}".format(MAIN0, MAIN4, MAIN2))
         if choice == '1':
@@ -367,7 +367,7 @@ def mainMenu():
  {2} ██   ██ ██ ██    ██ ██    ██ ██      ██  ████  {3}██         ██    ██      {1}
  {2} ██   ██ ██ ██████   ██████   ███████ ██   ███  {3}███████    ██    ███████ {1}
 
-                                                     v{3}0{1}.{3}3{1}.{3}2{1} BY:DARKSEC{2}
+                                                     v{3}0{1}.{3}4{1}.{3}0{1} BY:DARKSEC{2}
              {3}[{2} Modern Phishing Tool With Advanced Functionality {3}]
 {3}[{2} PHISHING-KEYLOGGER-INFORMATION COLLECTOR-ALL_IN_ONE_TOOL-SOCIALENGINEERING {3}]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~''').format(MAIN3, MAIN4, MAIN2, MAIN0))
