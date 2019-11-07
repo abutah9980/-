@@ -732,13 +732,13 @@ def endMessage(): #Message when HiddenEye exit
         choice = input("\n\n{0}[{1}?{0}] SELECT ANY ONE OPTION(1/2/3):\n\n{0}[{1}1{0}] Send Captured Data To Email \n{0}[{1}2{0}] Launch Script Again\n{0}[{1}3{0}]{0} EXIT SCRIPT \n >> {2}".format(MAIN0, MAIN4, MAIN2))
         if choice == '1':
            if path.isfile('Defs/Send_Email/emailconfig.py') == True:
-               system('python3 Defs/Send_Email/SendEmail.py')
+               system('python Defs/Send_Email/SendEmail.py')
            else:
                print('[ERROR!]: NO CONFIG FILE FOUND ! PLEASE CREATE CONFIG FILE FIRST TO USE THIS OPTION.')
                return endMessage()
 				   
         elif choice == '2':
-           system('sudo python3 HiddenEye.py')
+           system('python HiddenEye.py')
         elif choice == '3':
             system('clear')
             print (_('''
